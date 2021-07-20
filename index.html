@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="theme.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container" id="app">
+        <div class="card">
+            <h1>{{ title }}</h1>
+            <div class="form-control">
+                <input 
+                type="text"
+                v-bind:placeholder = "placeholderString"
+                v-bind:value = "inputValue"
+                v-on:input = "inputChangeHandler"
+                v-on:keypress.enter = "addNewNote"
+                />
+            </div>
+            <button class="btn" v-on:click="addNewNote">Добавить</button>
+            <hr v-if="notes.length"/>
+            <ul class="list">
+                <li class="list-item" v-for="(note, noteIndex) in notes">
+                    {{noteIndex + 1 + " заметка - "}}{{ note }}
+                    <button class="btn danger" v-on:click="removeNote(noteIndex, $event)">Удалить</button>
+                </li>
+            </ul>
+            <div v-if="notes.length > 1">
+                <button class="btn danger" v-on:click="removeAllNote">Удалить все записи</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+</body>
+</html>
